@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Valentine Surprise</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Pixelify+Sans:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Pixel heart decorations -->
+    <div class="pixel-heart-deco" style="top: 10%; left: 5%;"></div>
+    <div class="pixel-heart-deco" style="top: 20%; right: 8%; animation-delay: -2s;"></div>
+    <div class="pixel-heart-deco" style="bottom: 15%; left: 10%; animation-delay: -4s;"></div>
+    <div class="pixel-heart-deco" style="bottom: 25%; right: 12%; animation-delay: -6s;"></div>
+    
+    <!-- Slide 1: Greeting -->
+    <div class="slide active" id="slide-1">
+      <div class="inner-card">
+        <h1 class="big-intro">Hey cutieeee...</h1>
+        <p class="intro-dots">..............</p>
+        <p class="hint">press anywhere to start ▸</p>
+      </div>
+    </div>
+
+    <!-- Slide 2: Kuttan + music -->
+    <div class="slide" id="slide-2">
+      <div class="inner-card">
+        <p class="tiny-label">psst...</p>
+        <div class="photo-frame">
+          <img
+            src="kuttan.png"
+            alt="My favourite person"
+            class="kuttan-img"
+          />
+        </div>
+        <p class="caption animated-text" id="universe-text">
+          You are my whole little universe.
+        </p>
+        <p class="caption-and" id="and-text">And.......</p>
+        <button class="heart-chip" id="to-slide-3">
+          Next secret →
+        </button>
+      </div>
+      <audio id="love-audio" src="download.mp3" preload="auto"></audio>
+    </div>
+
+    <!-- Slide 3: The question -->
+    <div class="slide" id="slide-3">
+      <div class="inner-card pixel-card">
+        <div class="pixel-window-header">
+          <span class="pw-title">LOVE</span>
+          <span class="pw-controls">- □ ✕</span>
+        </div>
+
+        <div class="pixel-hearts-row">
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+        </div>
+
+        <div class="pixel-main" id="pixel-main">
+          <div id="question-state">
+            <!-- Random Compliment -->
+            <div class="compliment-box" id="compliment-box">
+              <span class="compliment-icon">✨</span>
+              <span class="compliment-text" id="compliment-text">You're amazing!</span>
+              <span class="compliment-icon">✨</span>
+            </div>
+            
+            <p class="tiny-label">okay, big question time</p>
+            <h1 class="question-title">Will you be my Valentine!!!!</h1>
+            <p class="question-subtitle">
+              Warning: saying yes comes with unlimited hugs, bad jokes and way
+              too many photos together.
+            </p>
+            
+            <!-- Love Meter -->
+            <div class="love-meter-container">
+              <div class="love-meter-label">💕 Love Meter 💕</div>
+              <div class="love-meter-bar">
+                <div class="love-meter-fill" id="love-meter-fill"></div>
+              </div>
+              <div class="love-meter-text" id="love-meter-text">0% convinced</div>
+            </div>
+            <div class="valentine-buttons">
+              <button class="heart-btn yes" id="yes-btn">Yes ♥</button>
+              <button class="heart-btn no" id="no-btn">No</button>
+            </div>
+            <p class="no-attempts-text" id="no-attempts-text"></p>
+
+            <p class="answer-text" id="answer-text">
+              Best. Decision. Ever. You, me, and the cutest Valentine date.
+            </p>
+          </div>
+
+          <div class="pixel-final" id="pixel-final">
+            <div class="celebration-container">
+              <div class="celebration-hearts">
+                <span class="big-heart">💕</span>
+                <span class="big-heart">💖</span>
+                <span class="big-heart">💗</span>
+              </div>
+              
+              <h2 class="celebration-title">Yay! We're Official! 💝</h2>
+              
+              <div class="romantic-message">
+                <p class="message-line">✨ You + Me = Perfect ✨</p>
+                <p class="message-line">💫 Forever & Always 💫</p>
+              </div>
+              
+              <div class="hearts-ring">
+                <span class="orbit-heart h1">♥</span>
+                <span class="orbit-heart h2">♥</span>
+                <span class="orbit-heart h3">♥</span>
+                <span class="orbit-heart h4">♥</span>
+                <span class="orbit-heart h5">♥</span>
+                <span class="orbit-heart h6">♥</span>
+              </div>
+              
+              <div class="love-quote">
+                <p>"Every love story is beautiful,</p>
+                <p>but ours is my favorite" 💕</p>
+              </div>
+            </div>
+            
+            <div class="pixel-date-bar">
+              <p>💕 Get ready for the best Valentine's Day ever! 💕</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- This audio should be a short clip saying "Will you be my Valentine" -->
+      <audio
+        id="question-audio"
+        src="valentine-question.mp3"
+        preload="auto"
+      ></audio>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
