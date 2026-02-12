@@ -215,15 +215,9 @@ if (noBtn && buttonsRow) {
   const yeetAway = (increaseLove = true) => {
     noAttempts++;
     
-    // Increase love meter
+    // Increase love meter - REMOVED, only Yes button should increase it now
     if (increaseLove) {
-      const loveMeter = document.getElementById('love-meter-fill');
-      const loveMeterText = document.getElementById('love-meter-text');
       const noAttemptsText = document.getElementById('no-attempts-text');
-      
-      const lovePercent = Math.min(noAttempts * 15, 100);
-      if (loveMeter) loveMeter.style.width = `${lovePercent}%`;
-      if (loveMeterText) loveMeterText.textContent = `${lovePercent}% convinced (just say yes! 💕)`;
       
       // Fun messages
       const messages = [
@@ -327,19 +321,56 @@ if (noBtn && buttonsRow) {
 // When she clicks "Yes"
 if (yesBtn) {
   yesBtn.addEventListener("click", () => {
+    const loveMeter = document.getElementById('love-meter-fill');
+    const loveMeterText = document.getElementById('love-meter-text');
+    
+    // Get current love percentage
+    let currentWidth = loveMeter ? parseFloat(loveMeter.style.width) || 0 : 0;
+    
+    // Increase by 20% each time Yes is clicked
+    currentWidth = Math.min(currentWidth + 20, 100);
+    
+    if (loveMeter) loveMeter.style.width = `${currentWidth}%`;
+    if (loveMeterText) {
+      if (currentWidth < 100) {
+        loveMeterText.textContent = `${currentWidth}% - Keep trying! Click Yes more! 💕`;
+      } else {
+        loveMeterText.textContent = '100% LOVE! 💕💕💕';
+      }
+    }
+    
+    // Only proceed if love meter is at 100%
+    if (currentWidth < 100) {
+      // Shake the button to indicate it's not ready yet
+      yesBtn.style.animation = 'none';
+      setTimeout(() => {
+        yesBtn.style.animation = '';
+      }, 10);
+      
+      // Show encouragement message
+      const noAttemptsText = document.getElementById('no-attempts-text');
+      if (noAttemptsText) {
+        const encouragements = [
+          "Almost there! Keep clicking Yes! 💖",
+          "You're getting closer! More Yes clicks! 💕",
+          "Just a bit more! Click Yes again! ✨",
+          "Don't stop now! Keep clicking! 💝",
+          "So close! One more Yes! 🥰"
+        ];
+        const randomMsg = encouragements[Math.floor(Math.random() * encouragements.length)];
+        noAttemptsText.textContent = randomMsg;
+      }
+      
+      return; // Don't proceed with celebration
+    }
+    
+    // Love meter is at 100%, proceed with celebration!
     if (buttonsRow) {
       buttonsRow.classList.add("answered");
     }
     if (answerText) {
       answerText.classList.add("show");
     }
-    
-    // Special messages based on attempts
-    const loveMeter = document.getElementById('love-meter-fill');
-    if (loveMeter) loveMeter.style.width = '100%';
-    
-    const loveMeterText = document.getElementById('love-meter-text');
-    if (loveMeterText) loveMeterText.textContent = '100% LOVE! 💕💕💕';
     
     if (questionTitle) {
       if (noAttempts === 0) {
