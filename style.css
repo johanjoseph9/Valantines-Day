@@ -878,18 +878,18 @@ h1 {
 
 .animated-text {
     display: inline-block;
-    animation: fadeInScale 1.5s ease-out forwards;
+    animation: fadeInSlide 1.5s ease-out forwards;
     opacity: 0;
 }
 
-@keyframes fadeInScale {
+@keyframes fadeInSlide {
     0% {
         opacity: 0;
-        transform: scale(0.8) translateY(10px);
+        transform: translateY(15px);
     }
     100% {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: translateY(0);
     }
 }
 
@@ -898,18 +898,7 @@ h1 {
     font-size: 16px;
     color: #6b2747;
     opacity: 0;
-    animation: typewriterFade 1s ease-out 1.5s forwards;
-}
-
-@keyframes typewriterFade {
-    0% {
-        opacity: 0;
-        transform: translateX(-10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    animation: fadeInSlide 1s ease-out 1.5s forwards;
 }
 
 .heart-chip {
@@ -1079,7 +1068,7 @@ h1 {
     color: #8c3f66;
     box-shadow: 0 6px 16px rgba(118, 55, 92, 0.3);
     position: relative;
-    transition: transform 0.08s linear;
+    transition: transform 0.08s linear, opacity 0.3s ease;
     animation: noButtonShake 0.5s ease-in-out infinite;
 }
 
