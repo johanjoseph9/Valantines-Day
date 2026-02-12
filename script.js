@@ -264,7 +264,13 @@ if (noBtn && buttonsRow) {
     const offsetY = Math.sin(angle) * radius;
     
     noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${0.9 + Math.random() * 0.2})`;
-    noBtn.style.transition = 'transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+    noBtn.style.transition = 'transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease';
+    
+    // Vanish effect
+    noBtn.style.opacity = '0';
+    setTimeout(() => {
+      noBtn.style.opacity = '1';
+    }, 300);
     
     // Screen shake effect
     document.body.classList.add('shake');
@@ -274,6 +280,9 @@ if (noBtn && buttonsRow) {
   // Detect mouse getting close to No button
   document.addEventListener('mousemove', (e) => {
     if (!noBtn || buttonsRow.classList.contains('answered')) return;
+    
+    // Only work on slide 3
+    if (!slide3 || !slide3.classList.contains('active')) return;
     
     const rect = noBtn.getBoundingClientRect();
     const btnCenterX = rect.left + rect.width / 2;
@@ -302,6 +311,13 @@ if (noBtn && buttonsRow) {
   
   // Prevent any click from registering
   noBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    yeetAway();
+  });
+  
+  // Touch events for mobile - make button vanish on touch
+  noBtn.addEventListener("touchstart", (e) => {
     e.preventDefault();
     e.stopPropagation();
     yeetAway();
@@ -361,9 +377,16 @@ if (yesBtn) {
   });
 }
 
-// Pop confetti if she clicks anywhere on the final window
+// Pop confetti if she clicks anywhere on slide 3 (only after answering or on button area)
 if (slide3) {
   slide3.addEventListener("click", (e) => {
+    // Only trigger if question has been answered or clicking in the pixel-main area
+    const pixelMain = document.getElementById('pixel-main');
+    const isInMainArea = pixelMain && pixelMain.contains(e.target);
+    const hasAnswered = buttonsRow && buttonsRow.classList.contains('answered');
+    
+    if (!isInMainArea && !hasAnswered) return;
+    
     const rect = slide3.getBoundingClientRect();
     const x = e.clientX || rect.left + rect.width / 2;
     const y = e.clientY || rect.top + rect.height / 2;
